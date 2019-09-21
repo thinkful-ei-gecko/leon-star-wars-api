@@ -26,9 +26,10 @@ export default class SearchForm extends Component {
 
   render() {
 
-    let categories = this.props.categories;
+    let categories = this.props.categories || {};
     return (
-      <form id="search-form" name="search-form" onSubmit={(e) => this.submitForm(e)}>
+      <form id="search-form" name="search-form" onSubmit={(e) => { this.submitForm(e)}
+      }>
         <label htmlFor="category-select">Category:</label>
         <select id="category-select" name="category-select" onChange={(e) => this.changeCategory(e)} required>
             <option value="">Select one of the following:</option>

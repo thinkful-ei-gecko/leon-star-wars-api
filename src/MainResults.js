@@ -3,6 +3,7 @@ import GoldDivider from './GoldDivider'
 import ResultsList from './ResultsList'
 import './MainResults.css'
 import './Button.css'
+import ErrorBoundary from './ErrorBoundary'
 
 export default function MainResults(props) {
   return (
@@ -13,7 +14,9 @@ export default function MainResults(props) {
       <p><span className="resultItem">Search Term:</span> {props.searchTerm}</p>
       <button type="button" onClick={props.clear} className="useButton">clear</button>
       <GoldDivider />
+      <ErrorBoundary>
       <ResultsList results={props.results}/>
+      </ErrorBoundary>
     </section>
   );
 }

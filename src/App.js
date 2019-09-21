@@ -4,13 +4,15 @@ import MainSearch from './MainSearch'
 import MainResults from './MainResults'
 import {Route, withRouter, Link} from 'react-router-dom'
 import Loading from './Loading'
+import ErrorBoundary from './ErrorBoundary'
 
 class App extends React.Component {
   state = {
     rootCategories : {},
     results : {},
     category: '',
-    searchTerm: ''
+    searchTerm: '',
+    hasError: false
   }
 
   clearResults = () => {
@@ -113,12 +115,18 @@ class App extends React.Component {
           </h1></Link>
         </header>
         <main>
-          <Route exact path = "/" render={() => 
-            <MainSearch categories={this.state.rootCategories} apiCall={this.callResultsFill}/>}  />
+          <ErrorBoundary>
+            <Route exact path = "/" render={() => 
+                <MainSearch categories={this.state.rootCategories} apiCall={this.callResultsFill}/>}  
+              />
             <Route path="/loading" component={Loading} />
-          <Route path ="/results" render={() => 
-            <MainResults results={this.state.results} clear={this.clearResults} category={this.state.category} searchTerm={this.state.searchTerm}>
-          </MainResults>} />
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <Route path ="/results" render={() => 
+              <MainResults results={this.state.results} clear={this.clearResults} category={this.state.category} searchTerm={this.state.searchTerm}>
+              </MainResults>} 
+            />
+          </ErrorBoundary>
         </main>
       </div>
     );

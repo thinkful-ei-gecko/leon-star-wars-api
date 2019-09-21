@@ -4,7 +4,7 @@ import './Loading.css'
 
 export default function Loading() {
   return(
-  <div class="loading">
+  <div className="loading">
     <img src={LoadingLogo} alt="loading" />
   </div>
   );
